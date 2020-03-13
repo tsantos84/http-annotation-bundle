@@ -21,6 +21,7 @@ class StringConverter implements ConverterInterface
             }
 
             $request->attributes->set($annotation->value, null);
+
             return;
         }
 

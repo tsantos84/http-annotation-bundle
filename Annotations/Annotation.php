@@ -19,6 +19,7 @@ abstract class Annotation
             $args = array_filter($reflectionMethod->getParameters(), fn (\ReflectionParameter $parameter) => $parameter->getName() === $this->value);
         } catch (\Error $error) {
             $annotationName = get_class($this);
+
             throw new InvalidArgumentException(sprintf('You need to inform the argument name for annotation "@%s" for controller "%s()"', $annotationName, $controllerName));
         }
 

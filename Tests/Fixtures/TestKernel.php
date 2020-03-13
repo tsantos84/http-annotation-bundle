@@ -5,8 +5,8 @@ namespace TSantos\HttpAnnotationBundle\Tests\Fixtures;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use TSantos\HttpAnnotationBundle\TSantosHttpAnnotationBundle;
 use TSantos\HttpAnnotationBundle\Tests\Fixtures\FooBundle\FooBundle;
+use TSantos\HttpAnnotationBundle\TSantosHttpAnnotationBundle;
 
 class TestKernel extends Kernel
 {
