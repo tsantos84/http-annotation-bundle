@@ -1,7 +1,7 @@
 {
     "name": "tsantos84/symfony-request-converter",
     "description": "A param converter for Symfony Framework",
-    "type": "library",
+    "type": "symfony-bundle",
     "require": {
         "ext-json": "*",
         "doctrine/annotations": "^1.0@dev",
