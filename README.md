@@ -272,7 +272,7 @@ public function show(string $cookie) {}
 
 ```php  
 /**  
- * @QueryParam("cookie") 
+ * @RequestCookie("cookie") 
  */
 public function show(string $cookie = 'foo') {}
 ```
@@ -281,8 +281,8 @@ public function show(string $cookie = 'foo') {}
 
 ```php  
 /**  
- * @QueryParam("cookie1")
- * @QueryParam("cookie2") 
+ * @RequestCookie("cookie1")
+ * @RequestCookie("cookie2") 
  */
  public function show(string $cookie1, string $cookie2) {}  
 ```
@@ -291,7 +291,7 @@ public function show(string $cookie = 'foo') {}
 
 ```php  
 /**  
- * @QueryParam("cookies")
+ * @RequestCookie("cookies")
  */
  public function show(ParameterBag $cookies) {}  
 ```
