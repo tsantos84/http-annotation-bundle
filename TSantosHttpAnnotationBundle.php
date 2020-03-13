@@ -9,7 +9,7 @@ use TSantos\HttpAnnotationBundle\DependencyInjection\Compiler\AddConverterPass;
 /**
  * Class RequestBundle.
  */
-class HttpAnnotationBundle extends Bundle
+class TSantosHttpAnnotationBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

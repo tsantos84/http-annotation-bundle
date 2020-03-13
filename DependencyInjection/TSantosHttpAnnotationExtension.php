@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * Class RequestExtension.
  */
-class HttpAnnotationExtension extends Extension
+class TSantosHttpAnnotationExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

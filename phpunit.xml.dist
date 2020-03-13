@@ -3,13 +3,13 @@
 <phpunit bootstrap="./vendor/autoload.php" colors="true">
     <testsuites>
         <testsuite name="Functional">
-            <directory suffix="Test.php">./tests/Functional</directory>
-            <exclude>./tests/Fixtures</exclude>
+            <directory suffix="Test.php">./Tests/Functional</directory>
+            <exclude>./Tests/Fixtures</exclude>
         </testsuite>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/</directory>
-            <exclude>./tests/Functional</exclude>
-            <exclude>./tests/Fixtures</exclude>
+            <directory suffix="Test.php">./Tests/</directory>
+            <exclude>./Tests/Functional</exclude>
+            <exclude>./Tests/Fixtures</exclude>
         </testsuite>
     </testsuites>
     <php>
@@ -19,9 +19,10 @@
     </php>
     <filter>
         <whitelist>
-            <directory>./</directory>
+            <directory suffix=".php">./</directory>
             <exclude>
-                <directory>./tests</directory>
+                <directory>./Tests</directory>
+                <directory>./Resources</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
