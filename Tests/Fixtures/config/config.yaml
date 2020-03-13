@@ -1,0 +1,6 @@
+framework:
+  test: true
+  router:
+    resource: "%kernel.project_dir%/config/routing.yaml"
+  serializer:
+    enabled: true

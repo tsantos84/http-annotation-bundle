@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="tsantos_request.controller_listener" class="TSantos\HttpAnnotationBundle\EventListener\ControllerListener" public="false">
+            <argument type="service" id="annotation_reader" />
+            <argument type="service" id="tsantos_request.converter_registry" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="tsantos_request.converter_registry" class="TSantos\HttpAnnotationBundle\ConverterRegistry" public="false" />
+        <service id="tsantos_request.request_body_string_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestBody\StringConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.request_body_json_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestBody\JsonConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.request_body_deserialize_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestBody\ComplexTypeConverter" public="false">
+            <argument type="service" id="tsantos_request.deserializer" />
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.path_param_converter" class="TSantos\HttpAnnotationBundle\Converter\PathParamConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.query_param_converter" class="TSantos\HttpAnnotationBundle\Converter\QueryParamConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.request_header_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestHeaderConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+        <service id="tsantos_request.request_cookie_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestCookieConverter" public="false">
+            <tag name="tsantos_request.converter" />
+        </service>
+
+        <service id="tsantos_request.symfony_deserializer" class="TSantos\HttpAnnotationBundle\Deserialization\SymfonySerializer" public="false">
+            <argument type="service" id="serializer" />
+        </service>
+        <service id="TSantos\HttpAnnotationBundle\Deserialization\DeserializationInterface" alias="tsantos_request.symfony_deserializer" public="false" />
+        <service id="tsantos_request.deserializer" alias="tsantos_request.symfony_deserializer" public="false" />
+    </services>
+</container>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./vendor/autoload.php" colors="true">
+    <testsuites>
+        <testsuite name="Functional">
+            <directory suffix="Test.php">./tests/Functional</directory>
+            <exclude>./tests/Fixtures</exclude>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/</directory>
+            <exclude>./tests/Functional</exclude>
+            <exclude>./tests/Fixtures</exclude>
+        </testsuite>
+    </testsuites>
+    <php>
+        <server name="KERNEL_CLASS" value="TSantos\HttpAnnotationBundle\Tests\Fixtures\TestKernel" />
+        <server name="KERNEL_DIR" value="tests/Fixtures/" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="/disabled/" />
+    </php>
+    <filter>
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./tests</directory>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
