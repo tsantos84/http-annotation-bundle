@@ -19,6 +19,14 @@ class RequestCookieTest extends WebTestCase
         $this->assertSame('foo', $crawler->text());
     }
 
+    public function testConstraint()
+    {
+        $client = self::createClient();
+        $client->getCookieJar()->set(new Cookie('cookie.name', 'foo'));
+        $client->request('GET', '/cookie/constraint');
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+    }
+
     public function testOptional()
     {
         $client = self::createClient();

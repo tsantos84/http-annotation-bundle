@@ -19,6 +19,15 @@ class RequestHeaderTest extends WebTestCase
         $this->assertSame('foo', $crawler->text());
     }
 
+    public function testConstraint()
+    {
+        $client = self::createClient();
+        $client->request('GET', '/header/constraint', [], [], [
+            'HTTP_X-CUSTOM-HEADER' => 'foo',
+        ]);
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+    }
+
     public function testOptional()
     {
         $client = self::createClient();

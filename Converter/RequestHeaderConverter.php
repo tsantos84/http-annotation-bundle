@@ -8,9 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 use TSantos\HttpAnnotationBundle\Annotations\RequestHeader;
+use TSantos\HttpAnnotationBundle\Traits\ValidatorTrait;
 
 class RequestHeaderConverter implements ConverterInterface
 {
+    use ValidatorTrait;
+
     public function convert(Annotation $annotation, Request $request): void
     {
         if (HeaderBag::class === $annotation->parameter->getType()->getName()) {
@@ -20,7 +23,9 @@ class RequestHeaderConverter implements ConverterInterface
         }
 
         if ($request->headers->has($annotation->name)) {
-            $request->attributes->set($annotation->value, $request->headers->get($annotation->name));
+            $value = $request->headers->get($annotation->name);
+            $this->validate($annotation, $value);
+            $request->attributes->set($annotation->value, $value);
 
             return;
         }

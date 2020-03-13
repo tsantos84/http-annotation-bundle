@@ -17,6 +17,14 @@ class PathParamTest extends WebTestCase
         $this->assertSame('foo', $crawler->text());
     }
 
+    public function testConstraint()
+    {
+        $client = self::createClient();
+        $client->request('GET', '/path/constraint/foo');
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+    }
+
+
     public function testOptional()
     {
         $client = self::createClient();

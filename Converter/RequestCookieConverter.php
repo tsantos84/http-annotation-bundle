@@ -8,9 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 use TSantos\HttpAnnotationBundle\Annotations\RequestCookie;
+use TSantos\HttpAnnotationBundle\Traits\ValidatorTrait;
 
 class RequestCookieConverter implements ConverterInterface
 {
+    use ValidatorTrait;
+
     public function convert(Annotation $annotation, Request $request): void
     {
         $cookies = $request->cookies;
@@ -22,7 +25,9 @@ class RequestCookieConverter implements ConverterInterface
         }
 
         if ($cookies->has($annotation->name)) {
-            $request->attributes->set($annotation->value, $cookies->get($annotation->name));
+            $value = $cookies->get($annotation->name);
+            $this->validate($annotation, $value);
+            $request->attributes->set($annotation->value, $value);
 
             return;
         }

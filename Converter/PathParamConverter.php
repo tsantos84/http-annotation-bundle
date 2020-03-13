@@ -8,9 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 use TSantos\HttpAnnotationBundle\Annotations\PathParam;
+use TSantos\HttpAnnotationBundle\Traits\ValidatorTrait;
 
 class PathParamConverter implements ConverterInterface
 {
+    use ValidatorTrait;
+
     public function convert(Annotation $annotation, Request $request): void
     {
         if (ParameterBag::class === $annotation->parameter->getType()->getName()) {
@@ -22,7 +25,9 @@ class PathParamConverter implements ConverterInterface
         $params = $request->attributes->get('_route_params');
 
         if (isset($params[$annotation->name])) {
-            $request->attributes->set($annotation->value, $params[$annotation->name]);
+            $value = $request->attributes->get($annotation->name);
+            $this->validate($annotation, $value);
+            $request->attributes->set($annotation->value, $value);
 
             return;
         }

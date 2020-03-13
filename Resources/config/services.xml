@@ -22,6 +22,7 @@
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.path_param_converter" class="TSantos\HttpAnnotationBundle\Converter\PathParamConverter" public="false">
+            <argument type="service" id="validator" />
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.query_param_converter" class="TSantos\HttpAnnotationBundle\Converter\QueryParamConverter" public="false">
@@ -29,9 +30,11 @@
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.request_header_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestHeaderConverter" public="false">
+            <argument type="service" id="validator" />
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.request_cookie_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestCookieConverter" public="false">
+            <argument type="service" id="validator" />
             <tag name="tsantos_request.converter" />
         </service>
 
