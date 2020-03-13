@@ -30,7 +30,7 @@ With this bundle the same code above can be rewritten with:
 /**
  * @Route("/search")
  * @QueryParam("term", constraints={
- *    @Length(min=3)
+ *    @Assert\Length(min=3)
  * })
  * @QueryParam("limit")
  */
@@ -41,8 +41,8 @@ function searchAction(string $term, int $limit = 10)
 ```
 
 As you can see, the query params was mapped to controller arguments and 
-inject to it. If `$term` was not passed on query string, the bundle will 
-raise a bad request automatically.
+inject to it. If `$term` is not passed on query string or its size is less then 3 characters, the bundle will 
+raise a bad request automatically
  
 ## Installation
 
