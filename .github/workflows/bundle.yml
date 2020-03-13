@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  Build:
 
     runs-on: ubuntu-latest
 
@@ -19,11 +19,6 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
 
     - name: Run test suites
       run: composer test
