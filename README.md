@@ -14,12 +14,12 @@ function searchAction(Request $request)
 {
     $term = $request->query->get('term');
      
-    if (null === $term) {
+    if (null === $term || length($term) < 3) {
         throw new HttpException(400);
     }
     
     $limit = $request->query->getInt('limit', 10);
-    
+
     // perform search with $term and $limit
 }
 ```
@@ -29,12 +29,14 @@ With this bundle the same code above can be rewritten with:
 ```php
 /**
  * @Route("/search")
- * @QueryParam("term")
+ * @QueryParam("term", constraints={
+ *    @Length(min=3)
+ * })
  * @QueryParam("limit")
  */
 function searchAction(string $term, int $limit = 10)
 {
- // perform search with $term and $limit
+   // perform search with $term and $limit
 }
 ```
 
