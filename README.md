@@ -95,6 +95,7 @@ kind of data (e.g DateTime, granted users, ORM and etc).
 * @RequestBody  
 * @QueryParam
 * @RequestHeader
+* @PathParam
 * @RequestCookie
   
 ## @RequestBody
@@ -188,7 +189,6 @@ public function show(string $foo = 'bar') {}
  */
  public function show(ParameterBag $query) {}  
 ```
-* Inject all query params as plain array
 
 ## @RequestHeader
 
@@ -246,3 +246,52 @@ your path param name is different from the controller argument:
 
 If you want to convert the param `id` to the real entity (e.g Post entity), just keep your controller as described
 in Symfony's documentation and omit the @PathParam annotation.
+
+## @RequestCookie
+
+* Inject a cookie value.
+
+```php  
+/**  
+ * @RequestCookie("cookie", name="cookie.name") 
+ */
+public function show(string $cookie) {}  
+```
+
+* You can omit the attribute `name` if the name of the cookie is equals to the controller 
+argument.
+
+```php  
+/**  
+ * @RequestCookie("cookie") 
+ */
+public function show(string $cookie) {}  
+```
+
+* Default value if the cookie isn't provided.
+
+```php  
+/**  
+ * @QueryParam("cookie") 
+ */
+public function show(string $cookie = 'foo') {}
+```
+
+* Inject multiple cookies
+
+```php  
+/**  
+ * @QueryParam("cookie1")
+ * @QueryParam("cookie2") 
+ */
+ public function show(string $cookie1, string $cookie2) {}  
+```
+
+* Inject all cookies at once
+
+```php  
+/**  
+ * @QueryParam("cookies")
+ */
+ public function show(ParameterBag $cookies) {}  
+```
