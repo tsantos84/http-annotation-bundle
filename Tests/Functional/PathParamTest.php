@@ -24,7 +24,6 @@ class PathParamTest extends WebTestCase
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
-
     public function testOptional()
     {
         $client = self::createClient();
