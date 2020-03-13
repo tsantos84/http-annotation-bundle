@@ -29,9 +29,8 @@ With this bundle the same code above can be rewritten with:
 ```php
 /**
  * @Route("/search")
- * @QueryParam("term", constraints={
- *    @Assert\Length(min=3)
- * })
+ *
+ * @QueryParam("term", constraints={@Assert\Length(min=3)})
  * @QueryParam("limit")
  */
 function searchAction(string $term, int $limit = 10)
@@ -41,9 +40,9 @@ function searchAction(string $term, int $limit = 10)
 ```
 
 As you can see, the query params was mapped to controller arguments and 
-inject to it. If `$term` is not passed on query string or its size is less then 3 characters, the bundle will 
-raise a bad request automatically
- 
+inject to it. If `$term` is not passed on query string or its size is less then 
+3 characters, the bundle will raise a bad request exception automatically
+
 ## Installation
 
 Make sure Composer is installed globally, as explained in the
@@ -85,12 +84,12 @@ return [
 
 ## HTTP Annotation Bundle vs Symfony Param Converter
 
-This is the first thought when can comes in your mind and this is natural. Both 
-libraries are not excluding each other because the HTTP Annotation Bundle is 
+This is the first thought when can come in your mind and this is natural comparison. 
+Both libraries are not excluding each other because the HTTP Annotation Bundle is 
 focused only to resolve HTTP values while Symfony Param Converter can convert any 
 kind of data (e.g DateTime, granted users, ORM and etc).
 
-*It means that this bundle isn't a placement to Param Converter*
+**It means that this bundle isn't a replacement to Param Converter**
 
 ## Annotations
 
