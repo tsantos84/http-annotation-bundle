@@ -1,16 +1,10 @@
 name: HTTP Annotation Bundle
 
-on:
-  push:
-    branches: ["*"]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
   Build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -20,26 +14,8 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Upload math result for job 1
-      uses: actions/upload-artifact@v1
-      with:
-       name: dependencies
-       path: vendor
+    - name: Run test suites
+      run: composer test
 
-  Test:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download dependencies
-        uses: actions/download-artifact@v1
-        with:
-          name: dependencies
-
-      - name: Run test suites
-        run: composer test
-
-      - name: Run code style
-        run: composer cs:check
+    - name: Run code style
+      run: composer cs:check
