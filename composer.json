@@ -14,7 +14,8 @@
         "phpunit/phpunit": "^9.1@dev",
         "symfony/browser-kit": "^5.1@dev",
         "symfony/property-access": "^5.1@dev",
-        "symfony/serializer": "^5.1@dev"
+        "symfony/serializer": "^5.1@dev",
+        "symfony/validator": "^5.1@dev"
     },
     "autoload": {
         "psr-4": {

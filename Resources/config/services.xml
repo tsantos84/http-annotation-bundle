@@ -25,6 +25,7 @@
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.query_param_converter" class="TSantos\HttpAnnotationBundle\Converter\QueryParamConverter" public="false">
+            <argument type="service" id="validator" />
             <tag name="tsantos_request.converter" />
         </service>
         <service id="tsantos_request.request_header_converter" class="TSantos\HttpAnnotationBundle\Converter\RequestHeaderConverter" public="false">

@@ -10,6 +10,7 @@ abstract class Annotation
     public string $value;
     public bool $required;
     public \ReflectionParameter $parameter;
+    public array $constraints = [];
 
     public function initialize(\ReflectionMethod $reflectionMethod, Request $request): void
     {

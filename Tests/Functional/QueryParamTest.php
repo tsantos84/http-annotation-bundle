@@ -17,6 +17,13 @@ class QueryParamTest extends WebTestCase
         $this->assertSame('bar', $crawler->text());
     }
 
+    public function testConstraint()
+    {
+        $client = self::createClient();
+        $client->request('GET', '/query/constraint?foo=bar');
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+    }
+
     public function testOptional()
     {
         $client = self::createClient();
