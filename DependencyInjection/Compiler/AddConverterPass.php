@@ -16,17 +16,17 @@ class AddConverterPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('tsantos_request.converter_registry')) {
+        if (!$container->hasDefinition('tsantos_argument_resolver.resolver_registry')) {
             return;
         }
 
         $arguments = [];
 
-        foreach ($this->findAndSortTaggedServices('tsantos_request.converter', $container) as $service) {
+        foreach ($this->findAndSortTaggedServices('tsantos_argument_resolver.resolver', $container) as $service) {
             $arguments[] = new Reference($service);
         }
 
-        $definition = $container->getDefinition('tsantos_request.converter_registry');
+        $definition = $container->getDefinition('tsantos_argument_resolver.resolver_registry');
         $definition->setArgument(0, $arguments);
     }
 }

@@ -7,14 +7,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
-use TSantos\HttpAnnotationBundle\ConverterRegistry;
+use TSantos\HttpAnnotationBundle\ArgumentResolverRegistry;
 
 class ControllerListener implements EventSubscriberInterface
 {
-    private ConverterRegistry $registry;
+    private ArgumentResolverRegistry $registry;
     private Reader $reader;
 
-    public function __construct(Reader $reader, ConverterRegistry $registry)
+    public function __construct(Reader $reader, ArgumentResolverRegistry $registry)
     {
         $this->reader = $reader;
         $this->registry = $registry;

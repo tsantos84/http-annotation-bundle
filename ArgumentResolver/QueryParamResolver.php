@@ -1,31 +1,31 @@
 <?php
 
-namespace TSantos\HttpAnnotationBundle\Converter;
+namespace TSantos\HttpAnnotationBundle\ArgumentResolver;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
-use TSantos\HttpAnnotationBundle\Annotations\RequestCookie;
+use TSantos\HttpAnnotationBundle\Annotations\QueryParam;
 use TSantos\HttpAnnotationBundle\Traits\ValidatorTrait;
 
-class RequestCookieConverter implements ConverterInterface
+class QueryParamResolver implements ArgumentResolverInterface
 {
     use ValidatorTrait;
 
     public function convert(Annotation $annotation, Request $request): void
     {
-        $cookies = $request->cookies;
-
         if (ParameterBag::class === $annotation->parameter->getType()->getName()) {
-            $request->attributes->set($annotation->value, $cookies);
+            $request->attributes->set($annotation->value, $request->query);
 
             return;
         }
 
-        if ($cookies->has($annotation->name)) {
-            $value = $cookies->get($annotation->name);
+        $params = $request->query->all();
+
+        if (isset($params[$annotation->name])) {
+            $value = $request->query->get($annotation->name);
             $this->validate($annotation, $value);
             $request->attributes->set($annotation->value, $value);
 
@@ -36,11 +36,11 @@ class RequestCookieConverter implements ConverterInterface
             return;
         }
 
-        throw new HttpException(Response::HTTP_BAD_REQUEST, sprintf('Missing required request cookie "%s"', $annotation->name));
+        throw new HttpException(Response::HTTP_BAD_REQUEST, sprintf('Missing required query param "%s"', $annotation->name));
     }
 
     public function supports(Annotation $annotation, Request $request): bool
     {
-        return $annotation instanceof RequestCookie;
+        return $annotation instanceof QueryParam;
     }
 }

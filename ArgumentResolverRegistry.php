@@ -4,11 +4,11 @@ namespace TSantos\HttpAnnotationBundle;
 
 use Symfony\Component\HttpFoundation\Request;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
-use TSantos\HttpAnnotationBundle\Converter\ConverterInterface;
+use TSantos\HttpAnnotationBundle\ArgumentResolver\ArgumentResolverInterface;
 
-class ConverterRegistry implements ConverterInterface, \Countable
+class ArgumentResolverRegistry implements ArgumentResolverInterface, \Countable
 {
-    /** @var ConverterInterface[] */
+    /** @var ArgumentResolverInterface[] */
     private array $converters = [];
 
     public function __construct(iterable $converters)
@@ -18,7 +18,7 @@ class ConverterRegistry implements ConverterInterface, \Countable
         }
     }
 
-    public function add(ConverterInterface $converter): void
+    public function add(ArgumentResolverInterface $converter): void
     {
         if ($converter === $this) {
             return;

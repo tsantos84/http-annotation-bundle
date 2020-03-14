@@ -1,15 +1,15 @@
 <?php
 
-namespace TSantos\HttpAnnotationBundle\Converter\RequestBody;
+namespace TSantos\HttpAnnotationBundle\ArgumentResolver\RequestBody;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 use TSantos\HttpAnnotationBundle\Annotations\RequestBody;
-use TSantos\HttpAnnotationBundle\Converter\ConverterInterface;
+use TSantos\HttpAnnotationBundle\ArgumentResolver\ArgumentResolverInterface;
 
-class StringConverter implements ConverterInterface
+class StringResolver implements ArgumentResolverInterface
 {
     public function convert(Annotation $annotation, Request $request): void
     {

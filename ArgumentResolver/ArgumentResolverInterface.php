@@ -1,11 +1,11 @@
 <?php
 
-namespace TSantos\HttpAnnotationBundle\Converter;
+namespace TSantos\HttpAnnotationBundle\ArgumentResolver;
 
 use Symfony\Component\HttpFoundation\Request;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 
-interface ConverterInterface
+interface ArgumentResolverInterface
 {
     public function convert(Annotation $annotation, Request $request): void;
 
