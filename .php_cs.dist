@@ -4,7 +4,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude(['Resources', 'vendor', 'var'])
     ->in(__DIR__);
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
         '@Symfony' => true,
