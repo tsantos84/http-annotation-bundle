@@ -7,15 +7,15 @@ use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractFunctionalTest extends WebTestCase
 {
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        $varDirectory = dirname(static::$kernel->getLogDir());
+        $varDirectory = dirname(dirname(__DIR__)).'/var';
 
         if (is_dir($varDirectory)) {
             $finder = new Filesystem();
             $finder->remove($varDirectory);
         }
 
-        parent::tearDown();
+        parent::tearDownAfterClass();
     }
 }
