@@ -2,14 +2,13 @@
 
 namespace TSantos\HttpAnnotationBundle\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
  * @coversNothing
  */
-class RequestCookieTest extends WebTestCase
+class RequestCookieTest extends AbstractFunctionalTest
 {
     public function testRequired()
     {

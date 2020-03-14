@@ -2,13 +2,11 @@
 
 namespace TSantos\HttpAnnotationBundle\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 /**
  * @internal
  * @coversNothing
  */
-class RequestHeaderTest extends WebTestCase
+class RequestHeaderTest extends AbstractFunctionalTest
 {
     public function testRequired()
     {

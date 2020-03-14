@@ -2,13 +2,11 @@
 
 namespace TSantos\HttpAnnotationBundle\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 /**
  * @internal
  * @coversNothing
  */
-class PathParamTest extends WebTestCase
+class PathParamTest extends AbstractFunctionalTest
 {
     public function testRequired()
     {
