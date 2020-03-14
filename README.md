@@ -1,5 +1,5 @@
-# TSantos HTTP Annotation Bundle  
-  
+# TSantos HTTP Annotation Bundle
+
 This bundle allows you to easily inject request data to your controllers 
 through annotations. Suppose you have a search url on your application 
 like: `/search?term=php&&limit=10`
@@ -12,15 +12,15 @@ Currently, a common way to handle requests like this would be something like wit
  */
 function searchAction(Request $request)
 {
-    $term = $request->query->get('term');
-     
-    if (null === $term || length($term) < 3) {
-        throw new HttpException(400);
-    }
-    
-    $limit = $request->query->getInt('limit', 10);
+$term = $request->query->get('term');
+ 
+if (null === $term || length($term) < 3) {
+throw new HttpException(400);
+}
 
-    // perform search with $term and $limit
+$limit = $request->query->getInt('limit', 10);
+
+// perform search with $term and $limit
 }
 ```
 
@@ -35,7 +35,7 @@ With this bundle the same code above can be rewritten with:
  */
 function searchAction(string $term, int $limit = 10)
 {
-   // perform search with $term and $limit
+ // perform search with $term and $limit
 }
 ```
 
@@ -49,21 +49,21 @@ with `ConstraintViolationListInterface` to your controller.
 /**
  * @Route("/search")
  * @QueryParam("term", constraints={
- *    @Assert\Length(min=3)
+ *@Assert\Length(min=3)
  * })
  * @QueryParam("limit")
  */
 function searchAction(ConstraintViolationListInterface $requestViolations, string $term, int $limit = 10)
 {
-    if (count($requestViolations)) {
-        // handle the violations by your self here
-    }
-    // perform search with $term and $limit
+if (count($requestViolations)) {
+// handle the violations by your self here
+}
+// perform search with $term and $limit
 }
 ```
 
-    All the constraints violations will be passed to `$requestViolations` even more than one query param is invalid. 
-    Keep in mind that if you prefer to handle the violations, the invalid value will be injected to your controller.
+All the constraints violations will be passed to `$requestViolations` even more than one query param is invalid. 
+Keep in mind that if you prefer to handle the violations, the invalid value will be injected to your controller.
 
 
 ## Installation
@@ -100,8 +100,8 @@ in the `config/bundles.php` file of your project:
 // config/bundles.php
 
 return [
-    // ...
-    TSantos\HttpAnnotationBundle\HttpAnnotationBundle::class => ['all' => true],
+// ...
+TSantos\HttpAnnotationBundle\HttpAnnotationBundle::class => ['all' => true],
 ];
 ```
 
@@ -116,52 +116,52 @@ kind of data (e.g DateTime, granted users, ORM and etc).
 
 ## Annotations
 
-* [@RequestBody](#requestbody)  
+* [@RequestBody](#requestbody)
 * [@QueryParam](#queryparam)
 * [@RequestHeader](#requestheader)
 * [@PathParam](#pathparam)
 * [@RequestCookie](#requestcookie)
-  
-## @RequestBody
-  
-* Pass the request content to `$content` variable as string.  
 
-```php  
-/**  
+## @RequestBody
+
+* Pass the request content to `$content` variable as string.
+
+```php
+/**
  * @RequestBody("content") 
  */
-public function show(string $content) {}  
+public function show(string $content) {}
 ```
 
 * A Bad Request exception will be thrown if the request content is empty. 
 If the content is not required, you can make your argument to allow `null` 
 and the exception will not be raised.
 
-```php  
+```php
 /** 
  * @RequestBody("content") 
  */
 public function show(?string $content) {}
-```  
+```
 
 * If the request is a JSON/XML content (e.g the headers has application/[json/xml]) 
-the argument resolvers will decode the content and pass it to controller.   
+the argument resolvers will decode the content and pass it to controller. 
 
-```php  
-/**  
+```php
+/**
  * @RequestBody("post")
  */
-public function show(array $post) {}  
-```  
+public function show(array $post) {}
+```
 
 * If the argument is type-hinted to some complex type, the argument resolvers will deserialize 
 the content and inject the result automatically.
-  
-```php  
-/**  
- * @RequestBody("post") 
+
+```php
+/**
+ * @RequestBody("post", serialization_groups={"registration"}) 
  */
-public function show(Post $post) {}  
+public function show(Post $post) {}
 ```
 
 ## @QueryParam
@@ -169,27 +169,27 @@ public function show(Post $post) {}
 * Inject a single query param when the route `/foo?foo=bar` is matched. If you don't 
 provide the param name, it will use the argument name to fetch data from query parameter bag.
 
-```php  
-/**  
+```php
+/**
  * @QueryParam("foo", name="foo") 
  */
-public function show(string $foo) { echo $foo; // will echo "bar"}  
+public function show(string $foo) { echo $foo; // will echo "bar"}
 ```
 
 * You can omit the attribute `name` if the name of the param is equals to the controller 
 argument.
 
-```php  
-/**  
+```php
+/**
  * @QueryParam("foo") 
  */
-public function show(string $foo) { echo $foo; // will echo "bar"}  
+public function show(string $foo) { echo $foo; // will echo "bar"}
 ```
 
 * Default value if the query param isn't passed.
 
-```php  
-/**  
+```php
+/**
  * @QueryParam("foo") 
  */
 public function show(string $foo = 'bar') {}
@@ -197,38 +197,38 @@ public function show(string $foo = 'bar') {}
 
 * Inject multiple query params
 
-```php  
-/**  
+```php
+/**
  * @QueryParam("foo")
  * @QueryParam("bar") 
  */
- public function show(string $foo, string $bar) {}  
+ public function show(string $foo, string $bar) {}
 ```
 
 * Inject all query params as `ParameterBag` instance
 
-```php  
-/**  
+```php
+/**
  * @QueryParam("query")
  */
- public function show(ParameterBag $query) {}  
+ public function show(ParameterBag $query) {}
 ```
 
 ## @RequestHeader
 
 * Inject a single header
 
-```php  
-/**  
+```php
+/**
  * @RequestHeader("contentType", name="Content-Type") 
  */
- public function show(string $contentType) { }  
+ public function show(string $contentType) { }
 ```
 
 * Default value if the header isn't passed.
 
-```php  
-/**  
+```php
+/**
  * @RequestHeader("contentType") 
  */
  public function show(string $contentType = 'application/json') {}
@@ -236,21 +236,21 @@ public function show(string $foo = 'bar') {}
 
 * Inject multiple headers
 
-```php  
-/**  
+```php
+/**
  * @RequestHeader("userId", name="X-USER-ID")
  * @RequestHeader("userAgent", name="User-Agent") 
  */
- public function show(string $userId, string $userAgent) {}  
+ public function show(string $userId, string $userAgent) {}
 ```
 
 * Inject all headers at once
 
-```php  
-/**  
+```php
+/**
  * @RequestHeader("headers")
  */
- public function show(HeaderBag $headers) {}  
+ public function show(HeaderBag $headers) {}
 ```
 
 ## @PathParam
@@ -259,13 +259,13 @@ Symfony automatically maps path params to controller arguments so this annotatio
 redundant and omit it is recommended. The only situation where make sense to use it is when
 your path param name is different from the controller argument:
 
-```php  
-/**  
+```php
+/**
  * @Route("/show/{id}/comments/{cId}")
  * @PathParam("postId", name="id")
  * @PathParam("commentId", name="cId")
  */
- public function show(int $postId, int $commentId) {}  
+ public function show(int $postId, int $commentId) {}
 ```
 
 If you want to resolve the param `id` to the real entity (e.g Post entity), just keep your controller as described
@@ -275,27 +275,27 @@ in Symfony's documentation and omit the @PathParam annotation.
 
 * Inject a cookie value.
 
-```php  
-/**  
+```php
+/**
  * @RequestCookie("cookie", name="cookie.name") 
  */
-public function show(string $cookie) {}  
+public function show(string $cookie) {}
 ```
 
 * You can omit the attribute `name` if the name of the cookie is equals to the controller 
 argument.
 
-```php  
-/**  
+```php
+/**
  * @RequestCookie("cookie") 
  */
-public function show(string $cookie) {}  
+public function show(string $cookie) {}
 ```
 
 * Default value if the cookie isn't provided.
 
-```php  
-/**  
+```php
+/**
  * @RequestCookie("cookie") 
  */
 public function show(string $cookie = 'foo') {}
@@ -303,19 +303,19 @@ public function show(string $cookie = 'foo') {}
 
 * Inject multiple cookies
 
-```php  
-/**  
+```php
+/**
  * @RequestCookie("cookie1")
  * @RequestCookie("cookie2") 
  */
- public function show(string $cookie1, string $cookie2) {}  
+ public function show(string $cookie1, string $cookie2) {}
 ```
 
 * Inject all cookies at once
 
-```php  
-/**  
+```php
+/**
  * @RequestCookie("cookies")
  */
- public function show(ParameterBag $cookies) {}  
+ public function show(ParameterBag $cookies) {}
 ```
