@@ -7,12 +7,12 @@
     <services>
         <service id="tsantos_argument_resolver.controller_listener" class="TSantos\HttpAnnotationBundle\EventListener\ControllerListener" public="false">
             <argument type="service" id="annotation_reader" />
-            <argument type="service" id="tsantos_argument_resolver.resolver_registry" />
+            <argument type="service" id="tsantos_argument_resolver.composite_resolver" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="tsantos_argument_resolver.resolver_registry" class="TSantos\HttpAnnotationBundle\ArgumentResolverRegistry" public="false" />
-        
+
         <!-- Argument Resolvers -->
+        <service id="tsantos_argument_resolver.composite_resolver" class="TSantos\HttpAnnotationBundle\ArgumentResolver\CompositeResolver" public="false" />
         <service id="tsantos_argument_resolver.request_body_string_resolver" class="TSantos\HttpAnnotationBundle\ArgumentResolver\RequestBody\StringResolver" public="false">
             <tag name="tsantos_argument_resolver.resolver" />
         </service>

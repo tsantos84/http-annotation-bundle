@@ -11,7 +11,7 @@ use TSantos\HttpAnnotationBundle\ArgumentResolver\ArgumentResolverInterface;
 
 class StringResolver implements ArgumentResolverInterface
 {
-    public function convert(Annotation $annotation, Request $request): void
+    public function resolve(Annotation $annotation, Request $request): void
     {
         $content = $request->getContent();
 

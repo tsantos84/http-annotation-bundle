@@ -16,7 +16,7 @@ class AddConverterPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('tsantos_argument_resolver.resolver_registry')) {
+        if (!$container->hasDefinition('tsantos_argument_resolver.composite_resolver')) {
             return;
         }
 
@@ -26,7 +26,7 @@ class AddConverterPass implements CompilerPassInterface
             $arguments[] = new Reference($service);
         }
 
-        $definition = $container->getDefinition('tsantos_argument_resolver.resolver_registry');
+        $definition = $container->getDefinition('tsantos_argument_resolver.composite_resolver');
         $definition->setArgument(0, $arguments);
     }
 }

@@ -14,7 +14,7 @@ class RequestHeaderResolver implements ArgumentResolverInterface
 {
     use ValidatorTrait;
 
-    public function convert(Annotation $annotation, Request $request): void
+    public function resolve(Annotation $annotation, Request $request): void
     {
         if (HeaderBag::class === $annotation->parameter->getType()->getName()) {
             $request->attributes->set($annotation->value, $request->headers);

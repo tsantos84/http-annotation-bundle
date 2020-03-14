@@ -2,9 +2,9 @@
 
 namespace TSantos\HttpAnnotationBundle\Traits;
 
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use TSantos\HttpAnnotationBundle\Annotations\Annotation;
+use TSantos\HttpAnnotationBundle\Exception\ConstraintViolationException;
 
 trait ValidatorTrait
 {
@@ -21,10 +21,10 @@ trait ValidatorTrait
             return;
         }
 
-        $result = $this->validator->validate($value, $annotation->constraints);
+        $violations = $this->validator->validate($value, $annotation->constraints);
 
-        if ($result->count()) {
-            throw new HttpException(400);
+        if ($violations->count()) {
+            throw new ConstraintViolationException($violations);
         }
     }
 }

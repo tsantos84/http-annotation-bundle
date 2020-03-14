@@ -19,7 +19,7 @@ class ComplexTypeResolver implements ArgumentResolverInterface
         $this->deserialization = $deserialization;
     }
 
-    public function convert(Annotation $annotation, Request $request): void
+    public function resolve(Annotation $annotation, Request $request): void
     {
         $content = $request->getContent();
 

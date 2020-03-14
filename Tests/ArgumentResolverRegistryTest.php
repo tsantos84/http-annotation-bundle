@@ -3,7 +3,7 @@
 namespace TSantos\HttpAnnotationBundle\Testss;
 
 use PHPUnit\Framework\TestCase;
-use TSantos\HttpAnnotationBundle\ArgumentResolverRegistry;
+use TSantos\HttpAnnotationBundle\ArgumentResolver\CompositeResolver;
 
 /**
  * @internal
@@ -13,9 +13,9 @@ class ArgumentResolverRegistryTest extends TestCase
 {
     public function testAddShouldAvoidIncludingItself()
     {
-        $registry = new ArgumentResolverRegistry([]);
-        $registry->add($registry);
+        $compositeResolver = new CompositeResolver([]);
+        $compositeResolver->add($compositeResolver);
 
-        $this->assertCount(0, $registry);
+        $this->assertCount(0, $compositeResolver);
     }
 }
