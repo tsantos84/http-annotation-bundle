@@ -40,10 +40,10 @@ function searchAction(string $term, int $limit = 10)
 ```
 
 As you can see, the query params was mapped to controller arguments and 
-inject to it. If `$term` is not passed on query string or its size is less then 
+injected to it. If `$term` is not passed on query string or its size is less then 
 3 characters, the bundle will raise a bad request exception automatically. If
 you want to handle the violations by yourself, just add an argument type-hinted 
-with `ConstraintViolationList` to your controller.
+with `ConstraintViolationListInterface` to your controller.
 
 ```php
 /**
