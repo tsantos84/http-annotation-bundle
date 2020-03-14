@@ -1,10 +1,10 @@
 # TSantos HTTP Annotation Bundle  
   
 This bundle allows you to easily inject request data to your controllers 
-through annotations. Suppose you perform a search and you have a url like 
-this: `/search?term=php&&limit=10`
+through annotations. Suppose you have a search url on your application 
+like: `/search?term=php&&limit=10`
 
-Currently, a common way to handle such request would be something like this:
+Currently, a common way to handle requests like this would be something like with:
 
 ```php
 /**
@@ -41,7 +41,30 @@ function searchAction(string $term, int $limit = 10)
 
 As you can see, the query params was mapped to controller arguments and 
 inject to it. If `$term` is not passed on query string or its size is less then 
-3 characters, the bundle will raise a bad request exception automatically
+3 characters, the bundle will raise a bad request exception automatically. If
+you want to handle the violations by yourself, just add an argument type-hinted 
+with `ConstraintViolationList` to your controller.
+
+```php
+/**
+ * @Route("/search")
+ * @QueryParam("term", constraints={
+ *    @Assert\Length(min=3)
+ * })
+ * @QueryParam("limit")
+ */
+function searchAction(ConstraintViolationListInterface $requestViolations, string $term, int $limit = 10)
+{
+    if (count($requestViolations)) {
+        // handle the violations by your self here
+    }
+    // perform search with $term and $limit
+}
+```
+
+    All the constraints violations will be passed to `$requestViolations` even more than one query param is invalid. 
+    Keep in mind that if you prefer to handle the violations, the invalid value will be injected to your controller.
+
 
 ## Installation
 
@@ -122,7 +145,7 @@ public function show(?string $content) {}
 ```  
 
 * If the request is a JSON/XML content (e.g the headers has application/[json/xml]) 
-the converter will decode the content and pass it to controller.   
+the argument resolvers will decode the content and pass it to controller.   
 
 ```php  
 /**  
@@ -131,7 +154,7 @@ the converter will decode the content and pass it to controller.
 public function show(array $post) {}  
 ```  
 
-* If the argument is type-hinted to some complex type, the converter will deserialize 
+* If the argument is type-hinted to some complex type, the argument resolvers will deserialize 
 the content and inject the result automatically.
   
 ```php  
@@ -245,7 +268,7 @@ your path param name is different from the controller argument:
  public function show(int $postId, int $commentId) {}  
 ```
 
-If you want to convert the param `id` to the real entity (e.g Post entity), just keep your controller as described
+If you want to resolve the param `id` to the real entity (e.g Post entity), just keep your controller as described
 in Symfony's documentation and omit the @PathParam annotation.
 
 ## @RequestCookie

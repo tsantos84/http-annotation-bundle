@@ -26,8 +26,8 @@ class RequestCookieResolver implements ArgumentResolverInterface
 
         if ($cookies->has($annotation->name)) {
             $value = $cookies->get($annotation->name);
-            $this->validate($annotation, $value);
             $request->attributes->set($annotation->value, $value);
+            $this->validate($annotation, $value);
 
             return;
         }

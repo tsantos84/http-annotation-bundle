@@ -22,6 +22,20 @@ class QueryParamTest extends AbstractFunctionalTest
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
+    public function testSingleConstraintArgument()
+    {
+        $client = self::createClient();
+        $crawler = $client->request('GET', '/query/constraint/single?foo=bar');
+        $this->assertSame('1', $crawler->text());
+    }
+
+    public function testMultipleConstraintArgument()
+    {
+        $client = self::createClient();
+        $client->request('GET', '/query/constraint/multiple?foo=bar');
+        $this->assertSame(500, $client->getResponse()->getStatusCode());
+    }
+
     public function testOptional()
     {
         $client = self::createClient();

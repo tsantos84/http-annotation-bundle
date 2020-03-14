@@ -26,8 +26,8 @@ class QueryParamResolver implements ArgumentResolverInterface
 
         if (isset($params[$annotation->name])) {
             $value = $request->query->get($annotation->name);
-            $this->validate($annotation, $value);
             $request->attributes->set($annotation->value, $value);
+            $this->validate($annotation, $value);
 
             return;
         }

@@ -24,8 +24,8 @@ class RequestHeaderResolver implements ArgumentResolverInterface
 
         if ($request->headers->has($annotation->name)) {
             $value = $request->headers->get($annotation->name);
-            $this->validate($annotation, $value);
             $request->attributes->set($annotation->value, $value);
+            $this->validate($annotation, $value);
 
             return;
         }

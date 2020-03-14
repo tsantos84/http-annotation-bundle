@@ -15,4 +15,9 @@ final class ConstraintViolationException extends HttpException
         parent::__construct(Response::HTTP_BAD_REQUEST, 'Your request contains some constraint violations');
         $this->violations = $violations;
     }
+
+    public function getViolations(): ConstraintViolationListInterface
+    {
+        return $this->violations;
+    }
 }
