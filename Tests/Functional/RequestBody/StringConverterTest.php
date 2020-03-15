@@ -10,14 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class StringConverterTest extends WebTestCase
 {
-    public function testRequired()
+    public function testRequired(): void
     {
         $client = self::createClient();
         $crawler = $client->request('POST', '/body/required', [], [], [], '{"foo":"bar"}');
         $this->assertSame('{"foo":"bar"}', $crawler->text());
     }
 
-    public function testOptional()
+    public function testOptional(): void
     {
         $client = self::createClient();
         $crawler = $client->request('POST', '/body/optional');

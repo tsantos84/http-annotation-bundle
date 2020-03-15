@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class ComplexTypeConverterTest extends WebTestCase
 {
-    public function testRequired()
+    public function testRequired(): void
     {
         $client = self::createClient();
         $client->request('POST', '/body/complex', [], [], [

@@ -14,6 +14,9 @@ class RequestCookieResolver implements ArgumentResolverInterface
 {
     use ValidatorTrait;
 
+    /**
+     * @param Annotation|RequestCookie $annotation
+     */
     public function resolve(Annotation $annotation, Request $request): void
     {
         $cookies = $request->cookies;

@@ -11,7 +11,7 @@ use TSantos\HttpAnnotationBundle\ArgumentResolver\CompositeResolver;
  */
 class ArgumentResolverRegistryTest extends TestCase
 {
-    public function testAddShouldAvoidIncludingItself()
+    public function testAddShouldAvoidIncludingItself(): void
     {
         $compositeResolver = new CompositeResolver([]);
         $compositeResolver->add($compositeResolver);

@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class JsonConverterTest extends WebTestCase
 {
-    public function testJsonBody()
+    public function testJsonBody(): void
     {
         $client = self::createClient();
         $client->request('POST', '/body/json', [], [], [

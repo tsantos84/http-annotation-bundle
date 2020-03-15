@@ -1,0 +1,8 @@
+parameters:
+  paths: [.]
+  level: 8
+  checkMissingIterableValueType: false
+  excludes_analyse:
+    - vendor
+    - Resources
+    - .github

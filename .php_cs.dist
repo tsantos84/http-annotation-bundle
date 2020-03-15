@@ -10,6 +10,7 @@ return (new PhpCsFixer\Config())
         '@Symfony' => true,
         '@PhpCsFixer' => true,
         'strict_param' => true,
+        'void_return' => true,
         'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder);

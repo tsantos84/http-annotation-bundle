@@ -26,7 +26,7 @@ class CompositeResolver implements ArgumentResolverInterface, \Countable
         $this->resolvers[] = $resolver;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->resolvers);
     }

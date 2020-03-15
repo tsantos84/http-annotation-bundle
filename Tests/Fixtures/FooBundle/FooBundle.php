@@ -9,7 +9,7 @@ use TSantos\HttpAnnotationBundle\Tests\Fixtures\FooBundle\Pass\LoggerPass;
 
 class FooBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new LoggerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, -64);
     }

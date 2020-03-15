@@ -8,28 +8,28 @@ namespace TSantos\HttpAnnotationBundle\Tests\Functional;
  */
 class PathParamTest extends AbstractFunctionalTest
 {
-    public function testRequired()
+    public function testRequired(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/path/required/foo');
         $this->assertSame('foo', $crawler->text());
     }
 
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $client = self::createClient();
         $client->request('GET', '/path/constraint/foo');
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptional()
+    public function testOptional(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/path/optional/foo');
         $this->assertSame('foo', $crawler->text());
     }
 
-    public function testBag()
+    public function testBag(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/path/bag/foo');

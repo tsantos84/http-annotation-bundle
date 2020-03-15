@@ -14,7 +14,7 @@ class AddConverterPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('tsantos_argument_resolver.composite_resolver')) {
             return;

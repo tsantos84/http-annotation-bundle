@@ -14,6 +14,9 @@ class PathParamResolver implements ArgumentResolverInterface
 {
     use ValidatorTrait;
 
+    /**
+     * @param Annotation|PathParam $annotation
+     */
     public function resolve(Annotation $annotation, Request $request): void
     {
         if (ParameterBag::class === $annotation->parameter->getType()->getName()) {

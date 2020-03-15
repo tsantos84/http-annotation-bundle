@@ -1,4 +1,4 @@
-# TSantos HTTP Annotation Bundle
+# TSantos HTTP Annotation Bundle ![HTTP Annotation Bundle](https://github.com/tsantos84/http-annotation-bundle/workflows/HTTP%20Annotation%20Bundle/badge.svg)
 
 This bundle allows you to easily inject request data to your controllers 
 through annotations. Suppose you have a search url on your application 

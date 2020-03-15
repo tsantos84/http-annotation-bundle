@@ -68,7 +68,7 @@ class ControllerListener implements EventSubscriberInterface
         }
     }
 
-    private function resolveConstraintViolationArgument(\ReflectionMethod $reflectionMethod, Request $request, ConstraintViolationList $constraintViolations)
+    private function resolveConstraintViolationArgument(\ReflectionMethod $reflectionMethod, Request $request, ConstraintViolationList $constraintViolations): void
     {
         /** @var \ReflectionParameter[] $violationArguments */
         $violationArguments = array_filter(

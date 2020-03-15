@@ -3,19 +3,26 @@ name: HTTP Annotation Bundle
 on: [push]
 
 jobs:
-  Build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+  tests:
+    name: "Tests"
+    runs-on: ${{ matrix.operating-system }}
 
-    - name: Validate composer.json and composer.lock
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest]
+
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v2
+
+    - name: "Validate composer.json and composer.lock"
       run: composer validate
 
-    - name: Install dependencies
+    - name: "Install dependencies"
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Run test suites
+    - name: "Run test suites"
       run: composer test
 
-    - name: Run code style
+    - name: "Code style"
       run: composer cs:check

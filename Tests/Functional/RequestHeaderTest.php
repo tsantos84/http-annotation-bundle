@@ -8,7 +8,7 @@ namespace TSantos\HttpAnnotationBundle\Tests\Functional;
  */
 class RequestHeaderTest extends AbstractFunctionalTest
 {
-    public function testRequired()
+    public function testRequired(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/header/required', [], [], [
@@ -17,7 +17,7 @@ class RequestHeaderTest extends AbstractFunctionalTest
         $this->assertSame('foo', $crawler->text());
     }
 
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $client = self::createClient();
         $client->request('GET', '/header/constraint', [], [], [
@@ -26,14 +26,14 @@ class RequestHeaderTest extends AbstractFunctionalTest
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
-    public function testOptional()
+    public function testOptional(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/header/optional');
         $this->assertSame('ok', $crawler->text());
     }
 
-    public function testBag()
+    public function testBag(): void
     {
         $client = self::createClient();
         $crawler = $client->request('GET', '/header/bag', [], [], [

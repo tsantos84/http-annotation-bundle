@@ -14,6 +14,9 @@ class QueryParamResolver implements ArgumentResolverInterface
 {
     use ValidatorTrait;
 
+    /**
+     * @param Annotation|QueryParam $annotation
+     */
     public function resolve(Annotation $annotation, Request $request): void
     {
         if (ParameterBag::class === $annotation->parameter->getType()->getName()) {
