@@ -33,7 +33,7 @@ class ComplexTypeResolver implements ArgumentResolverInterface
             throw new BadRequestHttpException('Missing content type');
         }
 
-        $options = $annotation->serializationGroups;
+        $options = $annotation->serializationGroups ?? [];
 
         $result = $this->deserialization->deserialize($content, $annotation->parameter->getType()->getName(), $contentType, $options);
         $request->attributes->set($annotation->value, $result);

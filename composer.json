@@ -12,6 +12,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.17@dev",
         "phpstan/phpstan": "^0.12.0@dev",
+        "phpstan/phpstan-symfony": "^0.12.0@dev",
         "phpunit/phpunit": "^9.1@dev",
         "symfony/browser-kit": "^5.1@dev",
         "symfony/property-access": "^5.1@dev",

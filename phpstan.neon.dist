@@ -7,3 +7,9 @@ parameters:
     - Resources
     - Tests
     - .github
+
+  ignoreErrors:
+    - '#TSantos\\HttpAnnotationBundle\\Annotations\\Annotation::\$(name|serializationGroups)#'
+    - '#Cannot call method getName\(\) on ReflectionType\|null#'
+    - '#Cannot call method isBuiltin\(\) on ReflectionType\|null#'
+    - '#Parameter \#\d+ \$constraints of method Symfony\\Component\\Validator\\Validator\\ValidatorInterface::validate\(\) expects array<Symfony\\Component\\Validator\\Constraint>|Symfony\\Component\\Validator\\Constraint\|null, array given#'

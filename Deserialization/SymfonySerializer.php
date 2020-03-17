@@ -13,8 +13,8 @@ class SymfonySerializer implements DeserializationInterface
         $this->serializer = $serializer;
     }
 
-    public function deserialize(string $content, string $type, string $format, array $options = [])
+    public function deserialize(string $content, string $type, string $format, array $options = []): object
     {
-        return $this->serializer->deserialize($content, $type, $format, $options);
+        return (object) $this->serializer->deserialize($content, $type, $format, $options);
     }
 }

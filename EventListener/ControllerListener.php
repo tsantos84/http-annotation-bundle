@@ -15,6 +15,7 @@ use TSantos\HttpAnnotationBundle\Annotations\Annotation;
 use TSantos\HttpAnnotationBundle\ArgumentResolver\CompositeResolver;
 use TSantos\HttpAnnotationBundle\Exception\BadControllerSignatureException;
 use TSantos\HttpAnnotationBundle\Exception\ConstraintViolationException;
+use TSantos\HttpAnnotationBundle\Exception\InvalidArgumentException;
 
 class ControllerListener implements EventSubscriberInterface
 {
@@ -48,7 +49,7 @@ class ControllerListener implements EventSubscriberInterface
         } elseif (\is_object($controller) && !$controller instanceof \Closure) {
             $reflectionMethod = (new \ReflectionObject($controller))->getMethod('__invoke');
         } else {
-            $reflectionMethod = new \ReflectionFunction($controller);
+            throw new InvalidArgumentException('Controllers must be callable, but arrays and invokable are accepted');
         }
 
         $constraintViolations = new ConstraintViolationList();
