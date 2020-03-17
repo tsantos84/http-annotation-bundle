@@ -26,3 +26,6 @@ jobs:
 
     - name: "Code style"
       run: composer cs:check
+
+    - name: "Static Analysis"
+      run: composer lint
