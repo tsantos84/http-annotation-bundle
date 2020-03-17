@@ -45,6 +45,10 @@ class ControllerListener implements EventSubscriberInterface
 
         if (is_array($controller)) {
             $reflectionMethod = new \ReflectionMethod($controller[0], $controller[1]);
+        } elseif (is_callable($controller) && method_exists($controller, '__invoke')) {
+            $reflectionMethod = new \ReflectionMethod($controller, '__invoke');
+        } elseif ($controller instanceof \Closure || is_callable($controller)) {
+            $reflectionMethod = new \ReflectionFunction($controller);
         }
 
         $constraintViolations = new ConstraintViolationList();

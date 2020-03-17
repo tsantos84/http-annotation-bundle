@@ -5,4 +5,5 @@ parameters:
   excludes_analyse:
     - vendor
     - Resources
+    - Tests
     - .github

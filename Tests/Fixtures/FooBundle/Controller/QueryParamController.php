@@ -50,7 +50,7 @@ class QueryParamController
      */
     public function constraintSingle(string $foo, ConstraintViolationListInterface $list): Response
     {
-        return new Response($list->count());
+        return new Response((string) $list->count());
     }
 
     /**
