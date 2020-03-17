@@ -15,7 +15,7 @@ trait ValidatorTrait
         $this->validator = $validator;
     }
 
-    private function validate(Annotation $annotation, string $value): void
+    private function validate(Annotation $annotation, ?string $value): void
     {
         if (empty($annotation->constraints)) {
             return;

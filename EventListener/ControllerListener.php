@@ -43,11 +43,11 @@ class ControllerListener implements EventSubscriberInterface
         $controller = $event->getController();
         $request = $event->getRequest();
 
-        if (is_array($controller)) {
+        if (\is_array($controller)) {
             $reflectionMethod = new \ReflectionMethod($controller[0], $controller[1]);
-        } elseif (is_callable($controller) && method_exists($controller, '__invoke')) {
-            $reflectionMethod = new \ReflectionMethod($controller, '__invoke');
-        } elseif ($controller instanceof \Closure || is_callable($controller)) {
+        } elseif (\is_object($controller) && !$controller instanceof \Closure) {
+            $reflectionMethod = (new \ReflectionObject($controller))->getMethod('__invoke');
+        } else {
             $reflectionMethod = new \ReflectionFunction($controller);
         }
 

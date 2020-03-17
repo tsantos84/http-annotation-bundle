@@ -19,7 +19,7 @@ class JsonResolver implements ArgumentResolverInterface
             throw new HttpException(Response::HTTP_BAD_REQUEST);
         }
 
-        $content = json_decode($content, true);
+        $content = json_decode((string) $content, true);
 
         if (json_last_error() > 0) {
             throw new HttpException(Response::HTTP_BAD_REQUEST);

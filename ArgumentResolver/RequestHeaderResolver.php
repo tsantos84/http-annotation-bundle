@@ -19,7 +19,7 @@ class RequestHeaderResolver implements ArgumentResolverInterface
      */
     public function resolve(Annotation $annotation, Request $request): void
     {
-        if (HeaderBag::class === $annotation->parameter->getType()->getName()) {
+        if ($annotation->parameter->hasType() && HeaderBag::class === $annotation->parameter->getType()->getName()) {
             $request->attributes->set($annotation->value, $request->headers);
 
             return;

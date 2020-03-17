@@ -19,7 +19,7 @@ class PathParamResolver implements ArgumentResolverInterface
      */
     public function resolve(Annotation $annotation, Request $request): void
     {
-        if (ParameterBag::class === $annotation->parameter->getType()->getName()) {
+        if ($annotation->parameter->hasType() && ParameterBag::class === $annotation->parameter->getType()->getName()) {
             $request->attributes->set($annotation->value, $request->attributes);
 
             return;
