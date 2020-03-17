@@ -12,15 +12,15 @@ Currently, a common way to handle requests like this would be something like wit
  */
 function searchAction(Request $request)
 {
-$term = $request->query->get('term');
- 
-if (null === $term || length($term) < 3) {
-throw new HttpException(400);
-}
-
-$limit = $request->query->getInt('limit', 10);
-
-// perform search with $term and $limit
+    $term = $request->query->get('term');
+     
+    if (null === $term || length($term) < 3) {
+        throw new HttpException(400);
+    }
+    
+    $limit = $request->query->getInt('limit', 10);
+    
+    // perform search with $term and $limit
 }
 ```
 
@@ -35,7 +35,7 @@ With this bundle the same code above can be rewritten with:
  */
 function searchAction(string $term, int $limit = 10)
 {
- // perform search with $term and $limit
+    // perform search with $term and $limit
 }
 ```
 
@@ -48,17 +48,15 @@ with `ConstraintViolationListInterface` to your controller.
 ```php
 /**
  * @Route("/search")
- * @QueryParam("term", constraints={
- *@Assert\Length(min=3)
- * })
+ * @QueryParam("term", constraints={@Assert\Length(min=3)})
  * @QueryParam("limit")
  */
 function searchAction(ConstraintViolationListInterface $requestViolations, string $term, int $limit = 10)
 {
-if (count($requestViolations)) {
-// handle the violations by your self here
-}
-// perform search with $term and $limit
+    if (count($requestViolations)) {
+        // handle the violations by your self here
+    }
+    // perform search with $term and $limit
 }
 ```
 
@@ -100,8 +98,8 @@ in the `config/bundles.php` file of your project:
 // config/bundles.php
 
 return [
-// ...
-TSantos\HttpAnnotationBundle\HttpAnnotationBundle::class => ['all' => true],
+    // ...
+    TSantos\HttpAnnotationBundle\HttpAnnotationBundle::class => ['all' => true],
 ];
 ```
 
